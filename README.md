@@ -7,3 +7,9 @@ Table of content
 * Templates = HTML files
 * Training = Random Forrest Model Training
 * Model = Model deployment using flask
+
+![alt text](Smart-Grid/Images/s1.png)
+
+![alt text](Smart-Grid/Images/s2.png)
+
+![alt text](Smart-Grid/Images/s4.png)
