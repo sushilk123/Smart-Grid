@@ -1,71 +1,11 @@
-<html>
-    <head>
-        <title>{{ title }} - Microblog</title>
-    </head>
-<head>
-<div><h1 style="text-align: center;">OUTPUT</h1>
-<img src="../static/5.jpg" width="2028" height="320" alt="MACHINE LEARNING FOR POWER GRID">
-
-
-</head>
-<body>
-        <div><h3>
-		
-		<html> 
-<style> 
-    
-      
-    form { 
-        border: 3px solid #f1f1f1; 
-    } 
-   
-    input[type=text], 
-    input[type=password] { 
-        width: 100%; 
-        padding: 12px 20px; 
-        margin: 8px 0; 
-        display: inline-block; 
-        border: 1px solid #ccc; 
-        box-sizing: border-box; 
-    } 
-      
-    button { 
-        background-color:Tomato ; 
-        color: white; 
-        padding: 14px 20px; 
-        margin: 8px 0; 
-        border: none; 
-        cursor: pointer; 
-		width: 100%; 
-    } 
-    .container { 
-        padding: 50px; 
-    } 
-      
-    span.psw { 
-        float: right; 
-        padding-top: 16px; 
-    } 
-      
-    @media screen and (max-width: 300px) { 
-        span.psw { 
-            display: block; 
-            float: none; 
-        } 
-        .cancelbtn { 
-            width: 150%; 
-        } 
-    } 
-</style style="text-align: center;"> 
-  
-<body> 
-  
-    <h2 style="text-align: center;">Total Power Consumption is :-</h2> 
-	<h2 style="text-align: center;">{{result}} </h2> 
-	<h2 style="color:red;">Congrats!! Your task is performed successfully.</h2>
-	
-</form>
-  
-</body> 
-  
-</html>
+{% extends "layout.html" %}
+{% block content %}
+<img src="../static/5.jpg" width="1100" height="320" alt="MACHINE LEARNING FOR POWER GRID">
+<br>
+<br>
+    <div class="content-section">
+        <h1 style="text-align: center;">OUTPUT</h1>
+            <p style="color:green;">Congrats!! Your task is performed successfully.</p>
+            <p style="color:blue;">Total Power Consumption for <br> Month:  {{ month }} <br> Year: {{ details['year'] }} <br>  State: {{ details['state'] }} Producer: {{ details['type_of_producer'] }} <br> Energy Source: {{ details['energy_source'] }} <br><br> =>  <b>{{result}} KW</b></p> 
+    </div>
+{% endblock content %}

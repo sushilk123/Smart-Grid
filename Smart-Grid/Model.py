@@ -1,12 +1,14 @@
-from flask import  Flask,render_template,request
+from flask import  Flask, render_template, url_for, flash, redirect,request
 import pickle
 from sklearn.preprocessing import LabelEncoder
 import pandas as pd 
-import numpy as np                     # For mathematical calculations 
+import numpy as np          
+from forms import RegistrationForm, LoginForm,InputForm          
 
 
 
 app = Flask(__name__)  
+app.config['SECRET_KEY'] = 'sushilk123'
 
 
 class MultiColumnLabelEncoder(LabelEncoder):
@@ -91,40 +93,68 @@ class MultiColumnLabelEncoder(LabelEncoder):
         return dframe.loc[:, self.columns].values
 
 def pickle_file():
-    loaded_model = pickle.load(open('label_encodings2', 'rb'))
-    loaded_model1 = pickle.load(open('random_forest_model2', 'rb'))
+    loaded_model = pickle.load(open('label_encodings', 'rb'))
+    loaded_model1 = pickle.load(open('random_forest_model', 'rb'))
     return loaded_model,loaded_model1
-    
-@app.route("/test", methods=["POST"]) 
-def login():
-    details = request.form
-    print(details)
-    return render_template('Input.html', title='Home')
-    
-@app.route('/')
-def index():
-    return render_template('Login.html', title='Home')
 
+@app.route("/")
+@app.route("/home", methods=['GET', 'POST'])
+def home():
+    form = InputForm()
+    if form.validate_on_submit():
+        flash(f'Data Submitted Succesfully!', 'success')
+        return redirect(url_for('predict'),form=form)
+    return render_template('home.html',form=form)
+
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f'Account created for {form.username.data}!', 'success')
+        return redirect(url_for('home'))
+    return render_template('register.html', title='Register', form=form)
+    
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == 'admin@blog.com' and form.password.data == 'password':
+            flash('You have been logged in!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Login Unsuccessful. Please check username and password', 'danger')
+    return render_template('login.html', title='Login', form=form)
 
   
-
 @app.route("/predict", methods=["POST"]) 
 def predict():
     li = []
     details = request.form
-    
-    li.append(details['fname'])
-    li.append(details['lname'])
-    li.append(details['Sname'])
-    li.append(details['Tname']) 
-    li.append(details['Ename'])
+    month_mapping={
+    '1':'Jan',
+    '2':'Feb',
+    '3':'Mar',
+    '4':'Apr',
+    '5':'May',
+    '6':'Jun',
+    '7':'Jul',
+    '8':'Aug',
+    '9':'Sep',
+    '10':'Oct',
+    '11':'Nov',
+    '12':'Dec'
+    }
+    li.append(details['year'])
+    li.append(details['month'])
+    li.append(details['state'])
+    li.append(details['type_of_producer']) 
+    li.append(details['energy_source'])
     encoder, model = pickle_file()
     encodings = encoder.fit_transform(li)
     print(encodings)
     result = str(list(model.predict([encodings])))
-    return render_template('Result.html', title='Home', result = result)
-    #return str(list(model.predict([encodings]))[0]) #render_template('newww.html', title='Home')
-    
+    return render_template('Result.html', title='Home', result = result, details=details,month=month_mapping[details['month']])
 @app.route("/out", methods=["POST"]) 
 def login1():
     if request.method == 'POST':

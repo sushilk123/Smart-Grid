@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2 style="text-align: center">PREDICTION CALCULATOR</h2> 
+    <div class="content-section">
+        <form method="POST" action="/predict">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <div class="form-group">
+                    {{ form.year.label(class="form-control-label") }}
+                    <select name="year" class="form-select" aria-label="Default select example" id="year">
+                      <option selected>Year</option>
+                      <option value="2008">2008</option>
+                      <option value="2009">2009</option>
+                      <option value="2010">2010</option>
+                      <option value="2011">2011</option>
+                      <option value="2012">2012</option>
+                      <option value="2013">2013</option>
+                      <option value="2014">2014</option>
+                      <option value="2015">2015</option>
+                      <option value="2016">2016</option>
+                      <option value="2017">2017</option>
+                      <option value="2018">2018</option>
+                      <option value="2019">2019</option>
+                      <option value="2020">2020</option>                
+                    </select>
+                </div>
+                <div class="form-group">
+                    {{ form.month.label(class="form-control-label") }}
+                    <select name="month" class="form-select" aria-label="Default select example" id="month">
+                      <option selected>Month</option>
+                      <option value="1">Jan</option>
+                      <option value="2">Feb</option>
+                      <option value="3">Mar</option>
+                      <option value="4">Apr</option>
+                      <option value="5">May</option>
+                      <option value="6">Jun</option>
+                      <option value="7">Jul</option>
+                      <option value="8">Aug</option>
+                      <option value="9">Sep</option>
+                      <option value="10">Oct</option>
+                      <option value="11">Nov</option>
+                      <option value="12">Dec</option> 
+                   </select>
+                </div>
+                <div class="form-group">
+                    {{ form.state.label(class="form-control-label") }}
+                     <select name="state" class="form-select" aria-label="Default select example" id="state">
+                      <option selected>State</option>
+                      <option value="AK">AK</option>
+                      <option value="AL">AL</option>
+                      <option value="AR">AR</option>
+                      <option value="AZ">AZ</option>
+                      <option value="CA">CA</option>
+                      <option value="CO">CO</option>
+                      <option value="CT">CT</option>
+                      <option value="DC">DC</option>
+                      <option value="DE">DE</option>
+                      <option value="FL">FL</option>
+                      <option value="GA">GA</option>
+                      <option value="HI">HI</option> 
+                      <option value="IA">IA</option>
+                      <option value="ID">ID</option>
+                      <option value="IN">IN</option>
+                      <option value="KS">KS</option>
+                      <option value="KY">KY</option>
+                      <option value="LA">LA</option>
+                      <option value="TX">TX</option>
+                      <option value="VA">VA</option>
+                      <option value="VT">VT</option>
+                      <option value="WV">WV</option>
+                      <option value="NY">NY</option>
+                     </select>
+                </div>
+                <div class="form-group">
+                    {{ form.type_of_producer.label(class="form-control-label") }}
+                    <select name="type_of_producer" class="form-select" aria-label="Default select example" id="type_of_producer">
+                      <option selected>Type of Producer</option>
+                      <option value="Total Electric Power Industry">Total Electric Power Industry</option>
+                      <option value="Electric Generators">Electric Generators</option>
+                      <option value="Electric Utilities">Electric Utilities</option>
+                      <option value="Combined Heat and Power">Combined Heat and Power</option>
+                      <option value="Electric Power">Electric Power</option>
+                      <option value="Commercial Power">Commercial Power</option>
+                      <option value="Industrial Power">Industrial Power</option>
+                      <option value="Independent Power Producers">Independent Power Producers</option>   
+                    </select>               
+                </div>
+               <div class="form-group">
+                  {{ form.energy_source.label(class="form-control-label") }}
+                  <select name="energy_source" class="form-select" aria-label="Default select example" id="energy_source">
+                    <option selected>Energy Source</option>
+                    <option value="Coal (Short Tons)">Coal (Short Tons)</option>
+                    <option value="Petroleum (Barrels)">Petroleum (Barrels)</option>
+                    <option value="Natural Gas (Mcf)">Natural Gas (Mcf)</option>
+                    <option value="Other Gases (Billion BTU)">Other Gases (Billion BTU)</option>
+                  </select>               
+               </div>      
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+
+{% endblock content %}
